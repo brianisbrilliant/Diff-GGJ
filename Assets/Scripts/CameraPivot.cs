@@ -26,29 +26,30 @@ public class CameraPivot : MonoBehaviour
         Debug.Log("pX: " + pivotX + " pY: " + pivotY);
     }
 
+    public void Restart() {
+        Application.LoadLevel(0);
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
         // Exit Sample  
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
-            #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false; 
-            #endif
+            Restart();
         }
 
 
-        if(Input.GetMouseButtonDown(0)) {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+        // if(Input.GetMouseButtonDown(0)) {
+        //     Cursor.lockState = CursorLockMode.Locked;
+        // }
 
-        if(Input.GetMouseButtonUp(0)) {
-            #if UNITY_EDITOR
-            Cursor.visible = true;
-            #endif
-            Cursor.lockState = CursorLockMode.None;
-        }
+        // if(Input.GetMouseButtonUp(0)) {
+        //     #if UNITY_EDITOR
+        //     Cursor.visible = true;
+        //     #endif
+        //     Cursor.lockState = CursorLockMode.None;
+        // }
 
         if (Input.GetMouseButton(0)) {
             var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
