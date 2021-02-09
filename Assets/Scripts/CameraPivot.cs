@@ -13,6 +13,10 @@ public class CameraPivot : MonoBehaviour
     [Tooltip("Whether or not to invert our Y axis for mouse input to rotation.")]
     public bool invertY = false;
 
+    public Camera camFoVRef;
+    public Vector2 fovMinMax;
+    public float fovScale = 2;
+
     Vector2 verticalCameraBounds = new Vector2(-15f, 75f);
 
 
@@ -50,6 +54,16 @@ public class CameraPivot : MonoBehaviour
         //     #endif
         //     Cursor.lockState = CursorLockMode.None;
         // }
+
+        Debug.Log(Input.mouseScrollDelta.y);        // gives values of -1, 0, or 1.
+
+        if(camFoVRef.fieldOfView >= fovMinMax.x && camFoVRef.fieldOfView <= fovMinMax.y) {
+            camFoVRef.fieldOfView -= Input.mouseScrollDelta.y * fovScale;
+        }
+
+        if(camFoVRef.fieldOfView < fovMinMax.x) { camFoVRef.fieldOfView = fovMinMax.x; }
+        if(camFoVRef.fieldOfView > fovMinMax.y) { camFoVRef.fieldOfView = fovMinMax.y; }
+
 
         if (Input.GetMouseButton(0)) {
             var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));

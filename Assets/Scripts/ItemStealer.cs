@@ -37,7 +37,7 @@ public class ItemStealer : MonoBehaviour
 
     void Update() {
         timer -= Time.deltaTime;
-        if(timer > 0) countdownText.text = "You have " + timer.ToString("0.00") + " seconds to memorize the room!";
+        if(timer > 0) countdownText.text = "You have " + timer.ToString("0") + " seconds to memorize the room!";
     }
 
     IEnumerator HideItem() {
